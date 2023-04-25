@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="admin">
+        <h1>{% block title %} ADMINISTRATOR LOGIN {% endblock %}</h1>
+        <hr>
+        {% if chart %} 
+        <div>
+            <h3>seating chart</h3>
+            <p>chart goes here?</p>
+            <h3>total price</h3>
+        </div>
+        {% endif %}
+        <form method="post">
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username">
+            <br>
+            <label for="password">Password: </label>
+            <input type="text" name="password" id="password">
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+{% endblock %}

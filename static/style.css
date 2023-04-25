@@ -1,0 +1,25 @@
+*{
+    background-color: lightgray;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.content {
+ 
+    background-color: white;
+}
+
+nav a {
+    color: #d64161;
+    font-size: 3em;
+    margin-left: 50px;
+    text-decoration: none;
+}
+
+.alert {
+    padding: 20px;
+    margin: 5px;
+    color: #970020;
+    background-color: #ffd5de;
+}
+
+

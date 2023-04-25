@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="home">
+        <h1>{% block title %} Trip Reservation System {% endblock %}</h1>
+        <hr>
+        <form method="post">
+            <P>Welcome to the reservation system. Use the selector below to select which page you would like to be brought to.</P>
+            <label for="page_select">Please choose an option:</label>
+            <select name="page_select" id="page_select">
+                <option value=""></option>
+                <option value="admin">Admin Page</option>
+                <option value="reservation">Reservation Page</option>
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+        </form> 
+    </div>
+    
+{% endblock %}

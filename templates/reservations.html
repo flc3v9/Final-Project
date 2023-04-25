@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="reservation">
+        <h1>{% block title %} RESERVE YOUR SEAT {% endblock %}</h1>
+        <hr>
+        {% if chart %} 
+        <div>
+            <h3>seating chart</h3>
+            <p>chart goes here?</p>
+            <h3>total price</h3>
+        </div>
+        {% endif %}
+        <form method="post">
+            <label for="first_name">First Name: </label>
+            <input type="text" name="first_name" id="first_name">
+            <br>
+            <label for="last_name">Last Name: </label>
+            <input type="text" name="last_name" id="last_name">
+            <br>
+            <label for="row">Choose a row: </label>
+            <select id="row" name="row">
+                <option value=""></option>
+                <option>test</option>
+            </select>
+            <br>
+            <label for="seat">Choose a seat: </label>
+            <select id="seat" name="seat">
+                <option value=""></option>
+                <option>test</option>
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+{% endblock %}
