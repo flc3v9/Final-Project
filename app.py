@@ -53,6 +53,14 @@ def determine_sales():
 
 @app.route("/admin", methods=('GET', 'POST'))
 def admin():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == '':
+            flash("A username is required.")
+        elif password == '':
+            flash("A password is required.")
 
     sales = determine_sales()
     return render_template('admin.html', sales=sales)
