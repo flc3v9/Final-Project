@@ -30,7 +30,11 @@ def admin():
 
 @app.route("/reservations", methods=('GET', 'POST'))
 def reservations():
-    return render_template('reservations.html')
+    if request.method == "GET":
+        return render_template('reservations.html')
+    
+    if request.method == "POST":
+        return render_template('reservations.html')
 
 
 app.run(host="0.0.0.0")
