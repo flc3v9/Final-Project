@@ -47,12 +47,15 @@ def determine_sales():
             if chart[row][seat] == 'X':
                 total_sales += cost_matrix[row][seat]
 
+    string_sales = "$" + str(total_sales)
     # this can be returned later.
-    print("Total Sales: ", total_sales)
+    return string_sales
 
 @app.route("/admin", methods=('GET', 'POST'))
 def admin():
-    return render_template('admin.html')
+
+    sales = determine_sales()
+    return render_template('admin.html', sales=sales)
 
 @app.route("/reservations", methods=('GET', 'POST'))
 def reservations():

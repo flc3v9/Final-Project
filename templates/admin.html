@@ -10,6 +10,11 @@
             <h3>total price</h3>
         </div>
         {% endif %}
+        {% if sales %}
+        <div>
+            <h3>Total Sales: {{ sales }}</h3>
+        </div>
+        {% endif %}
         <form method="post">
             <label for="username">Username: </label>
             <input type="text" name="username" id="username">
