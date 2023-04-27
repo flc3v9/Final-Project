@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="content-block">
     <div id="reservation">
-        <h1>{% block title %} RESERVE YOUR SEAT {% endblock %}</h1>
+        <h1 class="content-block-title">{% block title %} Reserve Your Seat {% endblock %}</h1>
         <hr>
         {% if chart %} 
         <div>
@@ -12,25 +13,34 @@
         {% endif %}
         <form method="post">
             <label for="first_name">First Name: </label>
+            <br>
             <input type="text" name="first_name" id="first_name">
             <br>
+            <br>
             <label for="last_name">Last Name: </label>
+            <br>
             <input type="text" name="last_name" id="last_name">
             <br>
+            <br>
             <label for="row">Choose a row: </label>
+            <br>
             <select id="row" name="row">
                 <option value=""></option>
                 <option>test</option>
             </select>
             <br>
+            <br>
             <label for="seat">Choose a seat: </label>
+            <br>
             <select id="seat" name="seat">
                 <option value=""></option>
                 <option>test</option>
             </select>
             <br>
+            <br>
             <button type="submit">Submit</button>
 
         </form>
+    </div>
     </div>
 {% endblock %}
