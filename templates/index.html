@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="content-block">
     <div id="home">
-        <h1>{% block title %} Trip Reservation System {% endblock %}</h1>
+        <h1 class="content-block-title">{% block title %} Trip Reservation System {% endblock %}</h1>
         <hr>
         <form method="post">
-            <P>Welcome to the reservation system. Use the selector below to select which page you would like to be brought to.</P>
-            <label for="page_select">Please choose an option:</label>
+            <P>Welcome to the reservation system. Use the selector below to choose whether to make a reservation or log in as administrator.</P>
+            <label for="page_select">Choose Menu Option:</label>
+            <br>
             <select name="page_select" id="page_select">
-                <option value=""></option>
+                <option value="">Choose an Option</option>
                 <option value="admin">Admin Page</option>
                 <option value="reservation">Reservation Page</option>
             </select>
             <br>
+            <br>
             <button type="submit">Submit</button>
         </form> 
+    </div>
     </div>
     
 {% endblock %}

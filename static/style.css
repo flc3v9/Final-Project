@@ -1,18 +1,30 @@
-*{
-    background-color: lightgray;
+body {
+    background-color: #e3e9f3;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.content {
- 
+/* *{
+    background-color: lightsteelblue;
+    font-family: Arial, Helvetica, sans-serif;
+} */
+
+/* .content {
     background-color: white;
-}
+} */
 
 nav a {
-    color: #d64161;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 3em;
+    color: #d64161;
+    margin-top: 10px;
     margin-left: 50px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     text-decoration: none;
+}
+
+hr {
+    border-color: black;
 }
 
 .alert {
@@ -22,4 +34,27 @@ nav a {
     background-color: #ffd5de;
 }
 
+.content-block {
+    background-color: white;
+    border: solid black 1px;
+    width: 60%;
+    padding: 20px;
+    margin: 0 auto;
+}
 
+.content-block-title {
+    font-size: 30px;
+    margin-top: 5px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+select {
+    background-color: #f2f2f2;
+    color: black;
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 1px;
+}
