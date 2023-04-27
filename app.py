@@ -30,7 +30,33 @@ def admin():
 
 @app.route("/reservations", methods=('GET', 'POST'))
 def reservations():
+    if request.method == 'POST':
+        first_name = request.form['first_name']
+        row = request.form['row']
+        seat = request.form['seat']
+        ticket_str = ticket(first_name)  # call the ticket function after first_name is assigned
+        # Save the data to file
+        with open('reservations.txt', 'a') as file:
+            file.write(f'{first_name}, {row}, {seat}, {ticket_str}\n')
+        return render_template('success.html', name=first_name, ticket=ticket_str)
     return render_template('reservations.html')
+
+def ticket(first_name):
+    class_name = "INFOTC4320"
+    nameLength = int(len(first_name))
+    class_nameLength = int(len(class_name))
+    nameRange = nameLength + class_nameLength
+    list1 = []
+    count = 0
+    for name_char in range(0,nameRange-1):
+        list1.append(first_name[count])
+        list1.append(class_name[count])
+        count+=1
+        if (count == nameLength-1):
+            break
+    ticket= ''.join(list1)+'4320'
+    return ticket
+
 
 
 app.run(host="0.0.0.0")
