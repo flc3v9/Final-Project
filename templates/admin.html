@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="content-block">
     <div id="admin">
-        <h1>{% block title %} ADMINISTRATOR LOGIN {% endblock %}</h1>
+        <h1 class="content-block-title">{% block title %} Administrator Login {% endblock %}</h1>
         <hr>
         {% if chart %} 
         <div>
@@ -12,13 +13,18 @@
         {% endif %}
         <form method="post">
             <label for="username">Username: </label>
+            <br>
             <input type="text" name="username" id="username">
             <br>
+            <br>
             <label for="password">Password: </label>
+            <br>
             <input type="text" name="password" id="password">
             <br>
-            <button type="submit">Submit</button>
+            <br>
+            <button type="submit">LOGIN</button>
         </form>
+    </div>
     </div>
     
 {% endblock %}
