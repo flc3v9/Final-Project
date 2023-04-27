@@ -5,12 +5,23 @@
     <div id="reservation">
         <h1 class="content-block-title">{% block title %} Reserve Your Seat {% endblock %}</h1>
         <hr>
-        {% if chart %} 
+        {% if success_message %} 
+            <p>{{ success_message | safe }}</p>
+        {% endif %}
+
+        {% if seat_chart %} 
         <div>
-            <h3>seating chart</h3>
-            <p>chart goes here?</p>
+            <h3>Seating Chart</h3>
+            <h4>X = Reserved Seat : O = Available Seat</h1>
+            <div id="seat-chart">
+                {% for row in seat_chart %}
+                {{ row }}
+                <br>
+                {% endfor %}
+            </div>
         </div>
         {% endif %}
+        <br>
         <form method="post">
             <label for="first_name">First Name: </label>
             <br>
@@ -25,7 +36,7 @@
             <label for="row">Choose a row: </label>
             <br>
             <select id="row" name="row">
-                <option value=""></option>
+                <option value="">Choose a Row</option>
                 <option value="0">1</option>
                 <option value="1">2</option>
                 <option value="2">3</option>
@@ -44,7 +55,7 @@
             <label for="seat">Choose a seat: </label>
             <br>
             <select id="seat" name="seat">
-                <option value=""></option>
+                <option value="">Choose a Seat</option>
                 <option value="0">1</option>
                 <option value="1">2</option>
                 <option value="2">3</option>
