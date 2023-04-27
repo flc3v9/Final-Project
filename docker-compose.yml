@@ -7,7 +7,7 @@ services:
     image: final_project_image
     container_name: final_project-container
     ports:
-      - "5003:5000"
+      - "5002:5000"
     volumes:
       - .:/app
     environment:
