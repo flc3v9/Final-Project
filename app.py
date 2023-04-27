@@ -24,6 +24,32 @@ def index():
 
 # use posts to show new infomration or put something specific on there, get is used to retreieve information
 
+
+'''
+Function to generate cost matrix for flights
+Input: none
+Output: Returns a 12 x 4 matrix of prices
+'''
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
+def determine_sales():
+
+    # delele this later once you input the branch as a function parameter
+    chart = [['0', '0', 'X', '0'], ['0', 'X', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['X', '0', '0', '0'], ['0', '0', 'X', '0']]
+
+    cost_matrix = get_cost_matrix()
+    total_sales = 0
+
+    for row in range(len(chart)):
+        for seat in range(len(chart[row])):
+            if chart[row][seat] == 'X':
+                total_sales += cost_matrix[row][seat]
+
+    # this can be returned later.
+    print("Total Sales: ", total_sales)
+
 @app.route("/admin", methods=('GET', 'POST'))
 def admin():
     return render_template('admin.html')
