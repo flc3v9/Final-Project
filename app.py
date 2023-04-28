@@ -70,7 +70,6 @@ def reservations():
                     return render_template('reservations.html', seat_chart=seat_chart)
 
                 # create ticket number
-                ticketNumber = "TICKET#HERE"
                 ticketNumber = seats.get_ticket(first_name)
 
                 # update reservations.txt
