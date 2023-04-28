@@ -57,6 +57,4 @@ def ticket(first_name):
     ticket= ''.join(list1)+'4320'
     return ticket
 
-
-
 app.run(host="0.0.0.0")
