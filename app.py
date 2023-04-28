@@ -8,7 +8,6 @@ app.config["DEBUG"] = True
 #flash  the secret key to secure sessions
 app.config['SECRET_KEY'] = 'your secret key'
 
-
 # use the app.route() decorator to create a Flask view function called index()
 # use posts to show new infomration or put something specific on there, get is used to retreieve information
 @app.route('/', methods=['GET','POST'])
@@ -29,20 +28,20 @@ def get_cost_matrix():
     return cost_matrix
 
 def determine_sales():
-    # delele this later once you input the branch as a function parameter
+    # get current seat chart
     chart = seats.get_seat_chart()
-    # chart = [['0', '0', 'X', '0'], ['0', 'X', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['X', '0', '0', '0'], ['0', '0', 'X', '0']]
-
+    # get cost matrix
     cost_matrix = get_cost_matrix()
+    # create sales variable
     total_sales = 0
-
+    # add to sales for each reserved seat
     for row in range(len(chart)):
         for seat in range(len(chart[row])):
             if chart[row][seat] == 'X':
                 total_sales += cost_matrix[row][seat]
-
+    # create sale string
     string_sales = "$" + str(total_sales)
-    # this can be returned later.
+    # return final string
     return string_sales
 
 @app.route("/admin", methods=('GET', 'POST'))
