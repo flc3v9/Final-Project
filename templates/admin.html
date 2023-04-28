@@ -4,18 +4,19 @@
     <div id="admin">
         <h1 class="content-block-title">{% block title %} Administrator Login {% endblock %}</h1>
         <hr>
-        {% if chart %} 
+        {% if seat_chart %} 
         <div>
-            <h3>seating chart</h3>
-            <p>chart goes here?</p>
-            <h3>total price</h3>
-        </div>
-        {% endif %}
-        {% if sales %}
-        <div>
+            <h3>Printing Seating Chart...</h3>
+            <div id="seat-chart">
+                {% for row in seat_chart %}
+                {{ row }}
+                <br>
+                {% endfor %}
+            </div>
             <h3>Total Sales: {{ sales }}</h3>
         </div>
         {% endif %}
+        
         <form method="post">
             <label for="username">Username: </label>
             <br>

@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = 'your secret key'
 
 
 # use the app.route() decorator to create a Flask view function called index()
+# use posts to show new infomration or put something specific on there, get is used to retreieve information
 @app.route('/', methods=['GET','POST'])
 def index():
     if request.method == "POST":
@@ -23,22 +24,14 @@ def index():
     
     return render_template('index.html')
 
-# use posts to show new infomration or put something specific on there, get is used to retreieve information
-
-
-'''
-Function to generate cost matrix for flights
-Input: none
-Output: Returns a 12 x 4 matrix of prices
-'''
 def get_cost_matrix():
     cost_matrix = [[100, 75, 50, 100] for row in range(12)]
     return cost_matrix
 
 def determine_sales():
-
     # delele this later once you input the branch as a function parameter
-    chart = [['0', '0', 'X', '0'], ['0', 'X', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['X', '0', '0', '0'], ['0', '0', 'X', '0']]
+    chart = seats.get_seat_chart()
+    # chart = [['0', '0', 'X', '0'], ['0', 'X', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['0', '0', '0', '0'], ['X', '0', '0', '0'], ['0', '0', 'X', '0']]
 
     cost_matrix = get_cost_matrix()
     total_sales = 0
@@ -54,17 +47,28 @@ def determine_sales():
 
 @app.route("/admin", methods=('GET', 'POST'))
 def admin():
+    if request.method == "GET":
+        return render_template('admin.html')
+
     if request.method == "POST":
+        # get form input
         username = request.form['username']
         password = request.form['password']
 
         if username == '':
             flash("A username is required.")
+            return render_template('admin.html')
         elif password == '':
             flash("A password is required.")
+            return render_template('admin.html')
+        
+        # get current seat chart
+        seat_chart = seats.get_seat_chart()
+        # get current sales
+        sales = determine_sales()
 
-    sales = determine_sales()
-    return render_template('admin.html', sales=sales)
+        # render page with seat chart and sales
+        return render_template('admin.html', sales=sales, seat_chart=seat_chart)
 
 @app.route("/reservations", methods=('GET', 'POST'))
 def reservations():
