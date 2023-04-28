@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
+import reservations as seats
 
 # make a Flask application object called app
 app = Flask(__name__)
@@ -67,7 +68,63 @@ def admin():
 
 @app.route("/reservations", methods=('GET', 'POST'))
 def reservations():
-    return render_template('reservations.html')
+    if request.method == "GET":
+        # try to render seat chart, but if it fails render page without it 
+        try:
+            seat_chart = seats.get_seat_chart()
+            return render_template('reservations.html', seat_chart=seat_chart)
+        except:
+            flash("Sorry, something went wrong with loading the seating chart. Please try again later.")
+            return render_template('reservations.html')
+    
+    if request.method == "POST":
+        # try to render seat chart, but if it fails render page without it 
+        try:
+            # get current seat chart
+            seat_chart = seats.get_seat_chart()
+            # try to get input, make reservation, and print success message
+            try:
+                # get form data
+                first_name = request.form["first_name"]
+                if first_name == "":
+                    flash("You must enter a first name.")
+                    return render_template('reservations.html', seat_chart=seat_chart)
+                last_name = request.form["last_name"]
+                if last_name == "":
+                    flash("You must enter a last name.")
+                    return render_template('reservations.html', seat_chart=seat_chart)
+                row = request.form["row"]
+                if row == "":
+                    flash("You must select a row.")
+                    return render_template('reservations.html', seat_chart=seat_chart)
+                seat = request.form["seat"]
+                if seat == "":
+                    flash("You must select a seat.")
+                    return render_template('reservations.html', seat_chart=seat_chart)
+                
+                # check if reservation already exists
+                if seat_chart[int(row)][int(seat)] == "X":
+                    flash("Sorry, that seat is already reserved.")
+                    return render_template('reservations.html', seat_chart=seat_chart)
 
+                # create ticket number
+                ticketNumber = seats.get_ticket(first_name)
+
+                # update reservations.txt
+                with open('reservations.txt', 'a') as seat_file:
+                    entry = f"{first_name}, {row}, {seat}, {ticketNumber}\n"
+                    seat_file.write(entry)
+                
+                # get new seat chart
+                seat_chart = seats.get_seat_chart()
+                # success message
+                success_message = f"Congratulations {first_name}! Row: {int(row)+1} Seat: {int(seat)+1} is now reserved for you. Enjoy your trip!<br>Your eTicket number is: {ticketNumber}"
+                return render_template('reservations.html', seat_chart=seat_chart, success_message=success_message)
+            except:
+                flash("Sorry, something went wrong. Please try again.")
+                return render_template('reservations.html', seat_chart=seat_chart)
+        except:
+            flash("Sorry, something went wrong with loading the seating chart. Please try again later.")
+            return render_template('reservations.html')
 
 app.run(host="0.0.0.0")
