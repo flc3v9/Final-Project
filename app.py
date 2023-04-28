@@ -54,11 +54,18 @@ def admin():
         username = request.form['username']
         password = request.form['password']
 
+        # user authentication
+        is_admin = bool
+        # ADD CODE HERE
+
         if username == '':
             flash("A username is required.")
             return render_template('admin.html')
         elif password == '':
             flash("A password is required.")
+            return render_template('admin.html')
+        # elif is_admin == False:
+            flash("Invalid username/password combination.")
             return render_template('admin.html')
         
         # get current seat chart
