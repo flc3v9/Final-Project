@@ -27,9 +27,8 @@ def get_cost_matrix():
     cost_matrix = [[100, 75, 50, 100] for row in range(12)]
     return cost_matrix
 
-def determine_sales():
-    # get current seat chart
-    chart = seats.get_seat_chart()
+def determine_sales(chart):
+
     # get cost matrix
     cost_matrix = get_cost_matrix()
     # create sales variable
@@ -65,13 +64,13 @@ def admin():
             flash("A password is required.")
             return render_template('admin.html')
         # elif is_admin == False:
-            flash("Invalid username/password combination.")
-            return render_template('admin.html')
+            # flash("Invalid username/password combination.")
+            # return render_template('admin.html')
         
         # get current seat chart
         seat_chart = seats.get_seat_chart()
         # get current sales
-        sales = determine_sales()
+        sales = determine_sales(seat_chart)
 
         # render page with seat chart and sales
         return render_template('admin.html', sales=sales, seat_chart=seat_chart)
