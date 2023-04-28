@@ -71,6 +71,7 @@ def reservations():
 
                 # create ticket number
                 ticketNumber = "TICKET#HERE"
+                ticketNumber = seats.get_ticket(first_name)
 
                 # update reservations.txt
                 with open('reservations.txt', 'a') as seat_file:
