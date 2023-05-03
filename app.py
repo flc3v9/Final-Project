@@ -43,6 +43,30 @@ def determine_sales(chart):
     # return final string
     return string_sales
 
+#admin login 
+def admin_login(login_user, login_pass):
+    #opens file
+    file_open = open("passcodes.txt","r")
+
+    #list to append set login info
+    user_list=[]
+    #appends login info from textfile
+    for line in file_open.readlines():
+        line = line.strip()
+        user, password = line.split(', ')
+        user_list.append((user, password))
+        
+    while True:
+        verify = False
+        #Checks user, password against sets of tuples in user_list
+        for user, password in user_list:
+            if login_user == user and login_pass == password:
+                verify = True
+                file_open.close()
+                return verify
+
+        return verify
+
 @app.route("/admin", methods=('GET', 'POST'))
 def admin():
     if request.method == "GET":
@@ -54,8 +78,7 @@ def admin():
         password = request.form['password']
 
         # user authentication
-        is_admin = bool
-        # ADD CODE HERE
+        is_admin = admin_login(username, password)
 
         if username == '':
             flash("A username is required.")
@@ -63,9 +86,9 @@ def admin():
         elif password == '':
             flash("A password is required.")
             return render_template('admin.html')
-        # elif is_admin == False:
-            # flash("Invalid username/password combination.")
-            # return render_template('admin.html')
+        elif is_admin == False:
+            flash("Invalid username/password combination.")
+            return render_template('admin.html')
         
         # get current seat chart
         seat_chart = seats.get_seat_chart()
